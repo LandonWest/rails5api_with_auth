@@ -27,6 +27,7 @@ gem 'puma', '~> 3.7'
 
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'active_model_serializers', '~> 0.10.5'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
