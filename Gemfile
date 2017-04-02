@@ -31,7 +31,8 @@ gem 'active_model_serializers', '~> 0.10.5'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
-  gem 'factory_girl_rails'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'faker'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
