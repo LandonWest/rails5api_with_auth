@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ApiUtils from './ApiUtils';
 
 class SignInForm extends Component {
   constructor(props) {
@@ -25,18 +26,51 @@ class SignInForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    alert(`Sign in form submitted. Name: ${this.state.name} Password: ${this.state.password}`);
+    // alert(`Sign in form submitted. Email: ${this.state.email} Password: ${this.state.password}`);
+
+    // function status(response) {
+    //   if (response.status >= 200 && response.status < 300) {
+    //     return Promise.resolve(response)
+    //   } else {
+    //     console.log(response.json().errors);
+    //     return Promise.reject(new Error(response.errors))
+    //   }
+    // }
+    //
+    // function json(response) {
+    //   return response.json()
+    // }
+
+    fetch('/auth/sign_in', {
+      method: 'post',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+    .then(ApiUtils.checkStatus)
+    .then( (response) => response.json() )
+    .catch( (error) => error )
+
+    this.setState({
+      email: '',
+      password: ''
+    });
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
+          Email:
           <input
-            name="name"
+            name="email"
             type="text"
-            value={this.state.name}
+            value={this.state.email}
             onChange={this.handleInputChange} />
         </label>
 
